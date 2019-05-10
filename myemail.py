@@ -15,9 +15,10 @@ class Email(object):
         password = getpass.getpass()
         return password
 
-    def send_message(self, message) -> None:
+    def send_messages(self, message, names=[]):
         port = 465  # For SSL
-
+        sender = self.__sender
+        receivers = self.__receivers
         # Create a secure SSL context
         context = ssl.create_default_context()
 
@@ -25,21 +26,23 @@ class Email(object):
         with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
 
             print('Trying to login.')
-            server.login(self.__sender, self.__get_password())
+            server.login(sender, self.__get_password())
             print('Login successful.\n')
             print('Sending emails.')
 
-            message.set_sender(self.__sender)
-            print('From: ', self.__sender)
+            message.set_sender(sender)
+            print('From: ', sender)
+            
+            while (len(names)!=len(receivers)): names.append('')
 
-            for receiver in self.__receivers:
+            for receiver, name in zip(receivers,names):
 
                 message.set_receiver(receiver)
                 print('To: ', receiver)
-                
+                message.custom_name(name)                                
+                    
                 server.sendmail(self.__sender, receiver, message.get_message())
+                time.sleep(1)
                 print('Email sent.')
                 
-                time.sleep(5)
-        
         print('Done.')

@@ -8,6 +8,7 @@ class Message(object):
         self.__receiver = ''
         self.__subject = ''
         self.__body = ''
+        self.__original_body = ''
 
     def set_sender(self, sender):
         self.__receiver = sender
@@ -23,6 +24,17 @@ class Message(object):
         content = txt_file.read()
         txt_file.close()
         self.__body = content
+        self.__original_body = content
+
+    def custom_name(self, name):
+        body = self.__original_body
+        
+        if name=='': 
+            body = body.replace(' <name>', '')
+        else:
+            body = body.replace(' <name>', ' '+name)
+        
+        self.__body = body
 
     def get_message(self):
         message = MIMEMultipart()
