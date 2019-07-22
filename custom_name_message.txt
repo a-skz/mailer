@@ -1,0 +1,12 @@
+Hi <recipient_name>, 
+
+This is am example message showing how to automatically customize the names of sender and recipient.
+
+To write the recipient name in the message, simply use <recipient_name>.
+To write the sender name in the message, simply use <sender_name>.
+
+The names will be customized as the messages are sent.
+
+Att,
+
+<sender_name>.

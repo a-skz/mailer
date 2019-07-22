@@ -1,7 +1,0 @@
-Olá, esse é um teste de geração de envios de emails automático.
-
-Não precisa responder :D
-
-Att,
-
-Alberto Sobrinho.
